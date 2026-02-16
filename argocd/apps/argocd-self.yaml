@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/stsewang17/platform-engineering.git
     targetRevision: HEAD
-    path: platform-engineering/argocd/install
+    path: argocd/install
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
