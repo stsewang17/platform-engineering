@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/stsewang17/platform-engineering.git
     targetRevision: HEAD
-    path: argocd/app  # Watches for child Applications
+    path: argocd/apps  # Watches for child Applications
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
