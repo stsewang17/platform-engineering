@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+data:
+  # Annotation-based tracking — prevents label conflicts with Crossplane
+  application.resourceTrackingMethod: annotation
+  # Exclude ProviderConfigUsage — prevents UI clutter and slowdown
+  resource.exclusions: |
+    - apiGroups:
+      - "*"
+      kinds:
+      - ProviderConfigUsage
