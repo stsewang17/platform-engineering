@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: provider-gcp-config
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"   # Deploy after Provider is ready
+spec:
+  project: default
+  source:
+    path: upbound/provider-gcp/config
+    repoURL: https://github.com/stsewang17/platform-engineering.git
+    targetRevision: HEAD
+  destination:
+    namespace: crossplane-system
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
