@@ -1,10 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-self
+  name: root-bootstrap
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "0" # Deploy ArgoCD self-management first
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -12,11 +10,13 @@ spec:
   source:
     repoURL: https://github.com/stsewang17/platform-engineering.git
     targetRevision: HEAD
-    path: argocd/install
+    path: argocd/apps  # Watches for child Applications
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
     automated:
+      prune: true
       selfHeal: true
-      # NOTE: prune intentionally omitted for self-management safety
+    syncOptions:
+      - CreateNamespace=true

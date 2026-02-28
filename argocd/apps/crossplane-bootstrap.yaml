@@ -1,10 +1,9 @@
+# The ArgoCD App of Apps for all Crossplane components
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-self
+  name: crossplane-bootstrap
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "0" # Deploy ArgoCD self-management first
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -12,11 +11,18 @@ spec:
   source:
     repoURL: https://github.com/stsewang17/platform-engineering.git
     targetRevision: HEAD
-    path: argocd/install
+    path: argocd/crossplane-bootstrap
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
     automated:
-      selfHeal: true
-      # NOTE: prune intentionally omitted for self-management safety
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 1
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m

@@ -1,22 +1,29 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: platform-bootstrap
+  name: crossplane
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"   # Deploy after helm secret
 spec:
   project: default
   source:
     repoURL: https://github.com/stsewang17/platform-engineering.git
     targetRevision: HEAD
-    path: argocd/apps  # Watches for child Applications
+    path: crossplane
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: crossplane-system
   syncPolicy:
     automated:
       prune: true
-      selfHeal: true
     syncOptions:
       - CreateNamespace=true
+    retry:
+      limit: 1
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m
