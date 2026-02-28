@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane-provider-gcp
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"   # Deploy after Crossplane core
+spec:
+  project: default
+  source:
+    path: upbound/provider-gcp/provider
+    repoURL: https://github.com/stsewang17/platform-engineering.git
+    targetRevision: HEAD
+  destination:
+    namespace: crossplane-system
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
