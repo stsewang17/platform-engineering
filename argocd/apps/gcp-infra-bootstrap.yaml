@@ -1,0 +1,28 @@
+# The ArgoCD App of Apps for all Crossplane components
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gcp-infra-bootstrap
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/stsewang17/platform-engineering.git
+    targetRevision: HEAD
+    path: argocd/infrastructure
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 1
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m
