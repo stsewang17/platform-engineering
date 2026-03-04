@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/stsewang17/platform-engineering.git
     targetRevision: HEAD
-    path: argocd/infrastructure
+    path: argocd/infrastructure/gcp
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
