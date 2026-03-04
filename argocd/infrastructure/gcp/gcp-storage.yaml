@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/stsewang17/platform-engineering.git
     targetRevision: HEAD
-    path: platform-engineering/infrastructure/gcp/gcs
+    path: argocd/infrastructure/gcp/gcs
   destination:
     namespace: crossplane-system
     server: https://kubernetes.default.svc
