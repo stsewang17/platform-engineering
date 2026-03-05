@@ -1,0 +1,13 @@
+# Enable GCP APIs required for GKE and networking
+---
+apiVersion: cloudplatform.gcp.upbound.io/v1beta1
+kind: ProjectService
+metadata:
+  name: enable-apis
+spec:
+  forProvider:
+    project: sandbox-489206
+    service: container.googleapis.com
+    disableDependentServices: false
+  providerConfigRef:
+    name: default
