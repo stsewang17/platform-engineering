@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gcp-storage
+  name: gcp-dev-infra
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/stsewang17/platform-engineering.git
     targetRevision: HEAD
-    path: argocd/infrastructure/gcp/gcs
+    path: argocd/infrastructure/gcp/dev
   destination:
     namespace: crossplane-system
     server: https://kubernetes.default.svc
