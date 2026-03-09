@@ -10,6 +10,9 @@ spec:
     # Start with no default node pool — we'll create a custom GPU pool
     initialNodeCount: 1
     removeDefaultNodePool: true
+    nodeConfig:
+      diskSizeGb: 50
+      diskType: pd-balanced
 
     # References to wave 1-2 resources
     networkRef:
