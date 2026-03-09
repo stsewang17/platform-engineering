@@ -1,24 +1,24 @@
-# apiVersion: compute.gcp.upbound.io/v1beta1
-# kind: Network
-# metadata:
-#   name: gemma-vpc
-# spec:
-#   forProvider:
-#     autoCreateSubnetworks: false
-#     project: sandbox-489206
-#   providerConfigRef:
-#     name: default
-# ---
-# apiVersion: compute.gcp.upbound.io/v1beta1
-# kind: Subnetwork
-# metadata:
-#   name: gemma-subnet
-# spec:
-#   forProvider:
-#     region: us-central1
-#     networkRef:
-#       name: gemma-vpc
-#     ipCidrRange: 10.0.0.0/24     # IP range for nodes
-#     project: sandbox-489206
-#   providerConfigRef:
-#     name: default
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Network
+metadata:
+  name: gemma-vpc
+spec:
+  forProvider:
+    autoCreateSubnetworks: false
+    project: sandbox-489206
+  providerConfigRef:
+    name: default
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Subnetwork
+metadata:
+  name: gemma-subnet
+spec:
+  forProvider:
+    region: us-central1
+    networkRef:
+      name: gemma-vpc
+    ipCidrRange: 10.0.0.0/24     # IP range for nodes
+    project: sandbox-489206
+  providerConfigRef:
+    name: default
