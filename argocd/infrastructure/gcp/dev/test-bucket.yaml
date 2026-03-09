@@ -1,14 +1,14 @@
-# apiVersion: storage.gcp.upbound.io/v1beta2
-# kind: Bucket
-# metadata:
-#   name: crossplane-argocd-gcs-bucket
-# spec:
-#   forProvider:
-#     location: US
-#     storageClass: STANDARD
-#     uniformBucketLevelAccess: true
-#     labels:
-#       managed-by: crossplane
-#       environment: dev
-#   providerConfigRef:
-#     name: default
+apiVersion: storage.gcp.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  name: crossplane-argocd-gcs-bucket
+spec:
+  forProvider:
+    location: US
+    storageClass: STANDARD
+    uniformBucketLevelAccess: true
+    labels:
+      managed-by: crossplane
+      environment: dev
+  providerConfigRef:
+    name: default
