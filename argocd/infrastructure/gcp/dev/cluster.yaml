@@ -1,32 +1,32 @@
-# Wave 3: GKE cluster (needs VPC + Subnet from waves 1-2)
-apiVersion: container.gcp.upbound.io/v1beta2
-kind: Cluster
-metadata:
-  name: gemma-inference-cluster
-spec:
-  forProvider:
-    location: us-central1
+# # Wave 3: GKE cluster (needs VPC + Subnet from waves 1-2)
+# apiVersion: container.gcp.upbound.io/v1beta2
+# kind: Cluster
+# metadata:
+#   name: gemma-inference-cluster
+# spec:
+#   forProvider:
+#     location: us-central1
 
-    # Start with no default node pool — we'll create a custom GPU pool
-    initialNodeCount: 1
-    removeDefaultNodePool: true
-    nodeConfig:
-      diskSizeGb: 50
-      diskType: pd-balanced
+#     # Start with no default node pool — we'll create a custom GPU pool
+#     initialNodeCount: 1
+#     removeDefaultNodePool: true
+#     nodeConfig:
+#       diskSizeGb: 50
+#       diskType: pd-balanced
 
-    # References to wave 1-2 resources
-    networkRef:
-      name: gemma-vpc
-    subnetworkRef:
-      name: gemma-subnet
+#     # References to wave 1-2 resources
+#     networkRef:
+#       name: gemma-vpc
+#     subnetworkRef:
+#       name: gemma-subnet
 
-    # Workload Identity for secure pod-to-GCP auth
-    workloadIdentityConfig:
-      workloadPool: sandbox-489206.svc.id.goog
+#     # Workload Identity for secure pod-to-GCP auth
+#     workloadIdentityConfig:
+#       workloadPool: sandbox-489206.svc.id.goog
 
-    # Release channel for auto-upgrades
-    releaseChannel:
-      channel: REGULAR
+#     # Release channel for auto-upgrades
+#     releaseChannel:
+#       channel: REGULAR
 
-  providerConfigRef:
-    name: default
+#   providerConfigRef:
+#     name: default
